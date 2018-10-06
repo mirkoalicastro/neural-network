@@ -30,8 +30,8 @@ suddivideParams = [15000 3000 3000]; %parametri di suddivisone del dataset per t
 suddivideCriterion = 1; %0 se suddivideParams sono relativi alla grandezza del dataset;
                         %1 se si riferiscono al numero esatto di elementi
 
-images = loadMNISTImages('mnist/train-images.idx3-ubyte');
-labels = loadMNISTLabels('mnist/train-labels.idx1-ubyte');
+images = loadMNISTImages('../mnist/train-images.idx3-ubyte');
+labels = loadMNISTLabels('../mnist/train-labels.idx1-ubyte');
 
 %Suddivisione del dataset
 tic;
