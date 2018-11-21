@@ -15,7 +15,7 @@ pca = true; %booleano per utilizzare o meno la PCA
 numNodes = [100 10]; %descrizione del numero di nodi per layer della rete
 functions = {@sigmoid, @identity}; %funzioni di output dei nodi una per strato
 functionsDx = {@sigmoidDx, @identityDx}; %derivate funzioni di output dei nodi una per strato
-learningType = 0; %0 per la resilient batch; 1 per gradientbatch
+learningType = 1; %0 per la resilient batch; 1 per gradientbatch
 epochesGradientBatch = 300; %numero di epoche per il training batch con discesa del gradiente
 epochesResilientBatch = 300; %numero di epoche per il training batch con RPROP
 eta = 0.00025; %eta valido per gradientbatch e la prima epoca di RPROP
@@ -30,8 +30,8 @@ suddivideParams = [15000 3000 3000]; %parametri di suddivisone del dataset per t
 suddivideCriterion = 1; %0 se suddivideParams sono relativi alla grandezza del dataset;
                         %1 se si riferiscono al numero esatto di elementi
 
-images = loadMNISTImages('../mnist/train-images.idx3-ubyte');
-labels = loadMNISTLabels('../mnist/train-labels.idx1-ubyte');
+images = loadMNISTImages('mnist/train-images.idx3-ubyte');
+labels = loadMNISTLabels('mnist/train-labels.idx1-ubyte');
 
 %Suddivisione del dataset
 tic;
@@ -68,7 +68,7 @@ fprintf('Valore eta: %.6f\n', eta);
 % Inizio la fase di learning mediante l'algortimo scelto col flag
 if learningType == 1
     fprintf('Eseguo il gradientBatch\n');
-    net = gradientBatch(net, TrS, TrL, VaS, VaL, epochesGradientBatch, errorFunction, errorFunctionDx, eta, afterProcessFunction, stoppingCriterion);
+    net = gradientBatch(net, TrS, TrL, VaS, VaL, epochesGradientBatch, errorFunction, errorFunctionDx, eta, afterProcessFunction);%, stoppingCriterion);
 else
     fprintf('Eseguo il Resilient Batch\n');
     fprintf('Valore etaPlus: %.6f\nValore etaMinus: %.6f\n', etaPlus, etaMinus);
