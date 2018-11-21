@@ -13,9 +13,9 @@ clear;
 %CONFIGURATION FLAG
 pca = true; %booleano per utilizzare o meno la PCA
 numNodes = [100 10]; %descrizione del numero di nodi per layer della rete
-functions = {@sigmoid, @identity}; %funzioni di output dei nodi una per strato
-functionsDx = {@sigmoidDx, @identityDx}; %derivate funzioni di output dei nodi una per strato
-learningType = 1; %0 per la resilient batch; 1 per gradientbatch
+functions = {@relu6, @identity}; %funzioni di output dei nodi una per strato
+functionsDx = {@relu6Dx, @identityDx}; %derivate funzioni di output dei nodi una per strato
+learningType = 0; %0 per la resilient batch; 1 per gradientbatch
 epochesGradientBatch = 300; %numero di epoche per il training batch con discesa del gradiente
 epochesResilientBatch = 300; %numero di epoche per il training batch con RPROP
 eta = 0.00025; %eta valido per gradientbatch e la prima epoca di RPROP
@@ -68,7 +68,7 @@ fprintf('Valore eta: %.6f\n', eta);
 % Inizio la fase di learning mediante l'algortimo scelto col flag
 if learningType == 1
     fprintf('Eseguo il gradientBatch\n');
-    net = gradientBatch(net, TrS, TrL, VaS, VaL, epochesGradientBatch, errorFunction, errorFunctionDx, eta, afterProcessFunction);%, stoppingCriterion);
+    net = gradientBatch(net, TrS, TrL, VaS, VaL, epochesGradientBatch, errorFunction, errorFunctionDx, eta, afterProcessFunction, stoppingCriterion);
 else
     fprintf('Eseguo il Resilient Batch\n');
     fprintf('Valore etaPlus: %.6f\nValore etaMinus: %.6f\n', etaPlus, etaMinus);
